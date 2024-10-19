@@ -23,8 +23,8 @@ const ProfileInput = () => {
         }
       );
       const json = await res.json();
-      if (!json.roomId) throw new Error(json.message);
-      setRooms((prev: Room[]) => [...prev, json]);
+      console.log(json.room);
+      setRooms((prev: Room[]) => [...prev, json.room]);
       roomIdRef.current!.value = "";
     } catch (error) {
       console.error(error);
