@@ -12,12 +12,20 @@ const SignIn = () => {
 
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userId = userIdRef.current?.value;
+    const id = userIdRef.current?.value;
     const name = nameRef.current?.value;
-    if (!userId || !name) return;
-    setUser({ userId, name });
+    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, id }),
+    });
+
+    const json = await response.json();
+    setUser(json?.user);
   };
 
   if (user) {

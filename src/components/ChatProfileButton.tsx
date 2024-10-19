@@ -1,41 +1,43 @@
 import { useRecoilValue, useRecoilState } from "recoil";
-import { SupportedIncomingMessage } from "../constants";
-import { currentRoomIdAtom, userAtom, wsAtom } from "../store/store";
+import { Room, SupportedIncomingMessage } from "../constants";
+import { currentRoomAtom, userAtom, wsAtom } from "../store/store";
 
-const ChatProfileButton = ({ roomId }: { roomId: string }) => {
+const ChatProfileButton = ({ room }: { room: Room }) => {
   const user = useRecoilValue(userAtom);
+  console.log("user", user);
+
   const ws = useRecoilValue(wsAtom);
-  const [currentRoomId, setCurrentRoomId] = useRecoilState(currentRoomIdAtom);
-  const joinRoom = () => {
+  const [currentRoom, setCurrentRoom] = useRecoilState(currentRoomAtom);
+
+  const handleJoinRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.disabled = true;
+    console.log(`Joining room ${room?.id}`);
     const data = {
       type: SupportedIncomingMessage.JoinRoom,
       payload: {
-        roomId: roomId,
-        ...user,
+        roomId: room?.id,
+        name: user?.name,
+        userId: user?.id,
       },
     };
     if (!ws) return;
     ws.send(JSON.stringify(data));
-  };
-  const handleJoinRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.disabled = true;
-    console.log(`Joining room ${roomId}`);
-    joinRoom();
-    setCurrentRoomId(roomId);
+    setCurrentRoom(room);
     e.currentTarget.disabled = false;
   };
+
   return (
     <button
       onClick={(e) => handleJoinRoom(e)}
       className={
         "flex flex-row items-center hover:bg-gray-100 rounded-xl p-2" +
-        (currentRoomId === roomId ? " bg-gray-100" : "")
+        (currentRoom?.id === room?.id ? " bg-gray-100" : "")
       }
     >
       <div className="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">
-        {roomId?.[0]}
+        {room?.id?.charAt(0)?.toUpperCase()}
       </div>
-      <div className="ml-2 text-sm font-semibold">{roomId}</div>
+      <div className="ml-2 text-sm font-semibold">{room?.name}</div>
     </button>
   );
 };

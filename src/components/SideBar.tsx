@@ -4,10 +4,10 @@ import ProfileBox from "./ProfileBox";
 import ProfileInput from "./ProfileInput";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { roomIdsAtom } from "../store/store";
+import { roomsAtom } from "../store/store";
 
 const SideBar = () => {
-  const setRoomIds = useSetRecoilState(roomIdsAtom);
+  const setRooms = useSetRecoilState(roomsAtom);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -16,8 +16,8 @@ const SideBar = () => {
           process.env.NEXT_PUBLIC_BASE_URL + "/rooms"
         );
         const json = await response.json();
-        console.log(json);
-        setRoomIds(json.roomIds);
+        console.log("rooms: ", json);
+        setRooms(json.rooms);
       } catch (error) {
         console.error(error);
       }

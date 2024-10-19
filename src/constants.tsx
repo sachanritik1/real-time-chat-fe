@@ -33,3 +33,10 @@ export enum SupportedOutgoingMessage {
   AddChat = "ADD_CHAT",
   UpdateChat = "UPDATE_CHAT",
 }
+
+export type Room = {
+  name: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

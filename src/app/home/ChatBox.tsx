@@ -3,14 +3,14 @@
 import SideBar from "@/components/SideBar";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userAtom, wsAtom, currentRoomIdAtom } from "@/store/store";
+import { userAtom, wsAtom, currentRoomAtom } from "@/store/store";
 import DefaultChatPage from "@/components/DefaultChatPage";
 import Chats from "@/components/Chats";
 import { useRouter } from "next/navigation";
 
 const ChatBox = () => {
   const user = useRecoilValue(userAtom);
-  const currentRoomId = useRecoilValue(currentRoomIdAtom);
+  const currentRoom = useRecoilValue(currentRoomAtom);
   const [ws, setWs] = useRecoilState(wsAtom);
 
   const router = useRouter();
@@ -47,7 +47,7 @@ const ChatBox = () => {
     <div className="flex h-screen antialiased text-gray-800">
       <div className="flex flex-row h-full w-full overflow-x-hidden">
         <SideBar />
-        {currentRoomId ? <Chats /> : <DefaultChatPage />}
+        {currentRoom?.id ? <Chats /> : <DefaultChatPage />}
       </div>
     </div>
   );

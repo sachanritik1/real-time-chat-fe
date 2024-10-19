@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { ChatType } from "../constants";
 import { SupportedOutgoingMessage } from "../constants";
 import { useRecoilValue } from "recoil";
-import { userAtom, wsAtom, currentRoomIdAtom } from "../store/store";
+import { userAtom, wsAtom, currentRoomAtom } from "../store/store";
 
 const Chats = () => {
   const user = useRecoilValue(userAtom);
   const ws = useRecoilValue(wsAtom);
-  const currentRoomId = useRecoilValue(currentRoomIdAtom);
+  const currentRoom = useRecoilValue(currentRoomAtom);
   const [chats, setChats] = useState<ChatType[]>([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Chats = () => {
 
   useEffect(() => {
     setChats([]);
-  }, [currentRoomId]);
+  }, [currentRoom?.id]);
 
   return (
     <div className="flex flex-col flex-auto h-full p-6">
@@ -48,7 +48,7 @@ const Chats = () => {
                 {chats.map((chat) => (
                   <Chat
                     key={chat.chatId}
-                    left={chat?.userId !== user?.userId}
+                    left={chat?.userId !== user?.id}
                     chat={chat}
                   />
                 ))}

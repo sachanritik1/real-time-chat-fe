@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { useSetRecoilState } from "recoil";
-import { roomIdsAtom } from "../store/store";
+import { roomsAtom } from "../store/store";
+import { Room } from "@/constants";
 
 const ProfileInput = () => {
   const roomIdRef = useRef<HTMLInputElement>(null);
-  const setRoomIds = useSetRecoilState(roomIdsAtom);
+  const setRooms = useSetRecoilState(roomsAtom);
 
   const handleCreateRoom = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const ProfileInput = () => {
       );
       const json = await res.json();
       if (!json.roomId) throw new Error(json.message);
-      setRoomIds((prev) => [...prev, json.roomId]);
+      setRooms((prev: Room[]) => [...prev, json]);
       roomIdRef.current!.value = "";
     } catch (error) {
       console.error(error);

@@ -3,18 +3,18 @@ import { useRecoilValue } from "recoil";
 import { userAtom } from "../store/store";
 import { SupportedIncomingMessage } from "../constants";
 import { wsAtom } from "../store/store";
-import { currentRoomIdAtom } from "../store/store";
+import { currentRoomAtom } from "../store/store";
 
 const ChatInput = () => {
   const user = useRecoilValue(userAtom);
   const ws = useRecoilValue(wsAtom);
-  const currentRoomId = useRecoilValue(currentRoomIdAtom);
+  const currentRoom = useRecoilValue(currentRoomAtom);
 
   const addChat = (message: string) => {
     if (message) {
       const newChat = {
-        roomId: currentRoomId,
-        userId: user?.userId,
+        roomId: currentRoom?.id,
+        userId: user?.id,
         message,
       };
       const data = {

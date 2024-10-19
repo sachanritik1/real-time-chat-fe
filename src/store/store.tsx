@@ -1,8 +1,14 @@
+import { Room } from "@/constants";
 import { atom } from "recoil";
 
 export type User = {
-  userId: string;
   name: string;
+  roomId: string | null;
+  id: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export const userAtom = atom({
@@ -10,11 +16,9 @@ export const userAtom = atom({
   default: null as User | null,
 });
 
-export type RoomId = string;
-
-export const roomIdsAtom = atom({
-  key: "roomIds",
-  default: [] as RoomId[],
+export const roomsAtom = atom({
+  key: "rooms",
+  default: [] as Room[],
 });
 
 export const wsAtom = atom({
@@ -22,7 +26,7 @@ export const wsAtom = atom({
   default: null as WebSocket | null,
 });
 
-export const currentRoomIdAtom = atom({
-  key: "currentRoomId",
-  default: null as RoomId | null,
+export const currentRoomAtom = atom({
+  key: "currentRoom",
+  default: null as Room | null,
 });
