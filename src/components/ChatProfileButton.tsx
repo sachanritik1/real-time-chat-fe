@@ -1,5 +1,5 @@
 import { useRecoilValue, useRecoilState } from "recoil";
-import { Room, SupportedIncomingMessage } from "../constants";
+import { Room, SupportedOutgoingMessage } from "../constants";
 import { currentRoomAtom, userAtom, wsAtom } from "../store/store";
 
 const ChatProfileButton = ({ room }: { room: Room }) => {
@@ -13,7 +13,7 @@ const ChatProfileButton = ({ room }: { room: Room }) => {
     e.currentTarget.disabled = true;
     console.log(`Joining room ${room?.id}`);
     const data = {
-      type: SupportedIncomingMessage.JoinRoom,
+      type: SupportedOutgoingMessage.JoinRoom,
       payload: {
         roomId: room?.id,
         name: user?.name,

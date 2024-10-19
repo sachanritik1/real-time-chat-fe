@@ -2,7 +2,7 @@ import ChatInput from "./ChatInput";
 import Chat from "./Chat";
 import { useEffect, useState } from "react";
 import { ChatType } from "../constants";
-import { SupportedOutgoingMessage } from "../constants";
+import { SupportedIncomingMessage } from "../constants";
 import { useRecoilValue } from "recoil";
 import { userAtom, wsAtom, currentRoomAtom } from "../store/store";
 
@@ -16,21 +16,28 @@ const Chats = () => {
     if (!ws) return;
     ws.onmessage = async (message) => {
       console.log(message.data);
-      const outgoingMessage = JSON.parse(message.data);
-      if (outgoingMessage.type === SupportedOutgoingMessage.AddChat) {
-        setChats((prevChats) => [outgoingMessage.payload, ...prevChats]);
-      } else if (outgoingMessage.type === SupportedOutgoingMessage.UpdateChat) {
+      const incomingMessage = JSON.parse(message.data);
+      if (incomingMessage.type === SupportedIncomingMessage.AddChat) {
+        setChats((prevChats) => [incomingMessage.payload, ...prevChats]);
+        console.log("Added Chat", incomingMessage.payload);
+      } else if (incomingMessage.type === SupportedIncomingMessage.UpdateChat) {
         const chat = chats.find(
-          (c) => c.chatId == outgoingMessage.payload.chatId
+          (c) => c.chatId == incomingMessage.payload.chatId
         );
         const updatedChat = {
           ...chat,
-          ...outgoingMessage.payload,
+          ...incomingMessage.payload,
         };
         setChats([...chats, updatedChat]);
       } else {
         console.log("Unsupported Message Types");
       }
+    };
+    return () => {
+      if (!ws) return;
+      ws.onclose = () => {
+        console.log("Disconnected from server");
+      };
     };
   }, []);
 

@@ -23,13 +23,13 @@ export type ChatType = {
   upvotes: number;
 };
 
-export enum SupportedIncomingMessage {
+export enum SupportedOutgoingMessage {
   JoinRoom = "JOIN_ROOM",
   SendMessage = "SEND_MESSAGE",
   UpvoteMessage = "UPVOTE_MESSAGE",
 }
 
-export enum SupportedOutgoingMessage {
+export enum SupportedIncomingMessage {
   AddChat = "ADD_CHAT",
   UpdateChat = "UPDATE_CHAT",
 }

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../store/store";
-import { SupportedIncomingMessage } from "../constants";
+import { SupportedOutgoingMessage } from "../constants";
 import { wsAtom } from "../store/store";
 import { currentRoomAtom } from "../store/store";
 
@@ -18,7 +18,7 @@ const ChatInput = () => {
         message,
       };
       const data = {
-        type: SupportedIncomingMessage.SendMessage,
+        type: SupportedOutgoingMessage.SendMessage,
         payload: newChat,
       };
       if (!ws) return;
