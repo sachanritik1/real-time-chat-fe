@@ -44,11 +44,9 @@ const ChatBox = () => {
   }
 
   return (
-    <div className="flex h-screen antialiased text-gray-800">
-      <div className="flex flex-row h-full w-full overflow-x-hidden">
-        <SideBar />
-        {currentRoom?.id ? <Chats /> : <DefaultChatPage />}
-      </div>
+    <div className="flex-col sm:flex-row flex h-[100dvh] gap-4 sm:gap-0 w-[100dvw] antialiased text-gray-800">
+      <SideBar />
+      {currentRoom?.id ? <Chats /> : <DefaultChatPage />}
     </div>
   );
 };
