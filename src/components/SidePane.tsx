@@ -9,7 +9,7 @@ function SidePane({
   position = "right",
   padding = "p-4",
   width = "w-[20rem]",
-  height = "h-full",
+  height = "h-[100dvh]",
   crossIcon = true,
   background = "bg-secondary",
 }: {
@@ -70,21 +70,19 @@ function SidePane({
         }}
       >
         <div
-          className={`flex flex-col justify-between gap-4 ${padding} h-full overflow-y-auto bg-blue-200 rounded-lg`}
+          className={`relative flex flex-col justify-between gap-4 ${padding} h-full overflow-y-auto bg-blue-200 rounded-lg`}
         >
-          <div className="relative h-full ">
-            {crossIcon && (
-              <GiHamburgerMenu
-                className="absolute left-1 top-1 size-6 cursor-pointer text-textPrimary"
-                role="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closeSidePane();
-                }}
-              />
-            )}
-            {children}
-          </div>
+          {crossIcon && (
+            <GiHamburgerMenu
+              className="absolute left-4 top-4 size-6 cursor-pointer text-textPrimary"
+              role="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeSidePane();
+              }}
+            />
+          )}
+          {children}
         </div>
       </div>
     </div>
