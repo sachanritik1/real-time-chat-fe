@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { userAtom } from "../store/store";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { fetchData } from "@/apiHandlers/fetch";
 
 const SignIn = () => {
   const userIdRef = useRef<HTMLInputElement>(null);
@@ -13,24 +14,10 @@ const SignIn = () => {
 
   const router = useRouter();
 
-  const {
-    mutate: login,
-    error,
-    isLoading,
-  } = useMutation({
-    mutationFn: async (user: { name: string; id: string }) => {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_BASE_URL + "/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      );
-      const json = await response.json();
-      return json;
+  const { mutate: login, isLoading } = useMutation({
+    mutationFn: async (user: { id: string; name: string }) => {
+      const data = await fetchData(user, "/login", "POST");
+      return data;
     },
     onSuccess: (data) => {
       setUser(data?.user);
