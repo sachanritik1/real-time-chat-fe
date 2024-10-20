@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userAtom, wsAtom } from "../store/store";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import { fetchData } from "@/apiHandlers/fetch";
 const SignIn = () => {
   const userIdRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-  const [user, setUser] = useRecoilState(userAtom);
+  const setUser = useSetRecoilState(userAtom);
   const [ws, setWs] = useRecoilState(wsAtom);
 
   const router = useRouter();

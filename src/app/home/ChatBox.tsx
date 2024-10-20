@@ -18,7 +18,7 @@ const ChatBox = () => {
 
   const [chats, setChats] = useState<ChatType[]>([]);
 
-  const [ws, setWs] = useRecoilState(wsAtom);
+  const ws = useRecoilValue(wsAtom);
 
   useEffect(() => {
     if (!ws) return;
