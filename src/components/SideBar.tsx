@@ -1,3 +1,5 @@
+"use client";
+
 import { LOGO_SVG } from "../constants";
 import UserBox from "./UserBox";
 import ProfileBox from "./ProfileBox";

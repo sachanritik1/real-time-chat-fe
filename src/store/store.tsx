@@ -25,8 +25,3 @@ export const wsAtom = atom({
   key: "ws",
   default: null as WebSocket | null,
 });
-
-export const currentRoomAtom = atom({
-  key: "currentRoom",
-  default: null as Room | null,
-});

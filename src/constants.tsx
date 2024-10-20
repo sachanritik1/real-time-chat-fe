@@ -32,6 +32,7 @@ export enum SupportedOutgoingMessage {
 export enum SupportedIncomingMessage {
   AddChat = "ADD_CHAT",
   UpdateChat = "UPDATE_CHAT",
+  JoinedRoom = "JOINED_ROOM",
 }
 
 export type Room = {

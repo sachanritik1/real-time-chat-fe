@@ -1,52 +1,50 @@
 "use client";
 
 import SideBar from "@/components/SideBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userAtom, wsAtom, currentRoomAtom } from "@/store/store";
-import DefaultChatPage from "@/components/DefaultChatPage";
+import { userAtom, wsAtom } from "@/store/store";
 import Chats from "@/components/Chats";
 import { useRouter } from "next/navigation";
+import { ChatType, SupportedIncomingMessage } from "@/constants";
 
 const ChatBox = () => {
-  const user = useRecoilValue(userAtom);
-  const currentRoom = useRecoilValue(currentRoomAtom);
-  const [ws, setWs] = useRecoilState(wsAtom);
-
+  const [user, setUser] = useRecoilState(userAtom);
   const router = useRouter();
-
-  console.log("websocket URL", process.env.NEXT_PUBLIC_WEBSOCKET_URL);
-
-  useEffect(() => {
-    async function connect() {
-      const socket = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL || "");
-      setWs(socket);
-      if (!ws) return;
-      ws.onopen = () => {
-        console.log("Connected to server");
-      };
-    }
-    connect();
-
-    return () => {
-      if (!ws) return;
-      ws.onclose = () => {
-        console.log("Disconnected from server");
-      };
-    };
-  }, []);
-
-  console.log("user", user);
 
   if (!user) {
     router.push("/");
-    return null;
   }
+
+  const [chats, setChats] = useState<ChatType[]>([]);
+
+  const [ws, setWs] = useRecoilState(wsAtom);
+
+  useEffect(() => {
+    if (!ws) return;
+    ws.onmessage = (message) => {
+      console.log("incoming message from chats component:", message.data);
+      const incomingMessage = JSON.parse(message.data);
+      if (incomingMessage.type === SupportedIncomingMessage.JoinedRoom) {
+        // @ts-expect-error: id might not exist on payload
+        setUser((prev) => ({
+          ...prev,
+          roomId: incomingMessage.payload.id,
+        }));
+        console.log("joined room", incomingMessage.payload.id);
+      } else if (incomingMessage.type === SupportedIncomingMessage.AddChat) {
+        setChats((prevChats) => [incomingMessage.payload, ...prevChats]);
+        console.log("Added Chat", incomingMessage.payload);
+      } else {
+        console.log("Unsupported Message Types");
+      }
+    };
+  }, []);
 
   return (
     <div className="flex-col sm:flex-row flex h-[100dvh] gap-4 sm:gap-0 w-[100dvw] antialiased text-gray-800">
       <SideBar />
-      {currentRoom?.id ? <Chats /> : <DefaultChatPage />}
+      <Chats chats={chats} />
     </div>
   );
 };

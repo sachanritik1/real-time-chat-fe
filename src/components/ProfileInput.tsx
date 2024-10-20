@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { useSetRecoilState } from "recoil";
 import { roomsAtom } from "../store/store";

@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { userAtom } from "../store/store";
+import { userAtom, wsAtom } from "../store/store";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { fetchData } from "@/apiHandlers/fetch";
@@ -11,6 +11,7 @@ const SignIn = () => {
   const userIdRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useRecoilState(userAtom);
+  const [ws, setWs] = useRecoilState(wsAtom);
 
   const router = useRouter();
 
@@ -20,7 +21,8 @@ const SignIn = () => {
       return data;
     },
     onSuccess: (data) => {
-      setUser(data?.user);
+      setUser({ ...data?.user, roomId: null });
+      router.push("/home");
     },
   });
 
@@ -32,9 +34,17 @@ const SignIn = () => {
     login({ name, id });
   };
 
-  if (user) {
-    router.push("/home");
-  }
+  useEffect(() => {
+    function connect() {
+      const socket = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL || "");
+      setWs(socket);
+    }
+    connect();
+    return () => {
+      if (!ws) return;
+      ws.close();
+    };
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto h-screen">
