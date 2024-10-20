@@ -11,7 +11,7 @@ const ProfileInput = () => {
 
   const { mutate: createRoom, isLoading } = useMutation({
     mutationFn: async (room: { name: string }) => {
-      const data = await fetchData(room, "/create/room", "POST");
+      const data = await fetchData("/create/room", "POST", room);
       return data;
     },
     onSuccess: (data) => {

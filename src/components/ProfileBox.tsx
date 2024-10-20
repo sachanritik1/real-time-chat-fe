@@ -9,16 +9,16 @@ const ProfileBox = () => {
       <div className="flex flex-row items-center justify-between text-xs">
         <span className="font-bold">Active Rooms</span>
         <span className="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full">
-          {rooms.length}
+          {rooms?.length}
         </span>
       </div>
       <div className="flex flex-col space-y-1 -mx-2 overflow-y-auto">
-        {rooms.length === 0 && (
+        {rooms?.length === 0 && (
           <div className="flex flex-row items-center text-sm p-2">
             No Rooms Active
           </div>
         )}
-        {rooms.map((room) => (
+        {rooms?.map((room) => (
           <ChatProfileButton key={room?.id} room={room} />
         ))}
       </div>

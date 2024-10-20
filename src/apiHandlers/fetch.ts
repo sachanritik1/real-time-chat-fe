@@ -1,16 +1,29 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchData(
-  payload: object,
   route: string,
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET",
+  payload?: object
 ) {
-  const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + route, {
+  const options: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
-  });
-  const json = await response.json();
-  return json;
+  };
+
+  if (method !== "GET") {
+    options.body = JSON.stringify(payload);
+  }
+
+  try {
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_BASE_URL + route,
+      options
+    );
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log("Error in fetching data", error);
+    return null;
+  }
 }

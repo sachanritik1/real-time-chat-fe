@@ -16,7 +16,7 @@ const SignIn = () => {
 
   const { mutate: login, isLoading } = useMutation({
     mutationFn: async (user: { id: string; name: string }) => {
-      const data = await fetchData(user, "/login", "POST");
+      const data = await fetchData("/login", "POST", user);
       return data;
     },
     onSuccess: (data) => {
