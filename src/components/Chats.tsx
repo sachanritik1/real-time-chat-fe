@@ -29,7 +29,7 @@ const Chats = ({ chats }: { chats: ChatType[] | null }) => {
   }, [chats]);
 
   if (!user?.roomId) {
-    <DefaultChatPage />;
+    return <DefaultChatPage />;
   }
 
   return (
