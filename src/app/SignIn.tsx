@@ -16,22 +16,22 @@ const SignIn = () => {
   const router = useRouter();
 
   const { mutate: login, isLoading } = useMutation({
-    mutationFn: async (user: { id: string; name: string }) => {
+    mutationFn: async (user: { email: string; name: string }) => {
       const data = await fetchData("/login", "POST", user);
       return data;
     },
     onSuccess: (data) => {
       setUser({ ...data?.user, roomId: null });
-      router.push("/home");
+      if (data?.user) router.push("/home");
     },
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const id = userIdRef.current?.value;
+    const email = userIdRef.current?.value;
     const name = nameRef.current?.value;
-    if (!id || !name) return;
-    login({ name, id });
+    if (!email || !name) return;
+    login({ name, email });
   };
 
   useEffect(() => {
@@ -54,14 +54,16 @@ const SignIn = () => {
           <input
             ref={userIdRef}
             className="px-4 py-1 rounded-md bg-neutral-200"
-            type="text"
-            placeholder="User Id"
+            type="email"
+            placeholder="Email Id"
+            required
           />
           <input
             ref={nameRef}
             className="px-4 py-1 rounded-md bg-neutral-200"
             type="text"
             placeholder="Name"
+            required
           />
           <button
             className="px-4 py-1 rounded-md text-white bg-blue-500 hover:bg-blue-600"
