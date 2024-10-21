@@ -51,9 +51,11 @@ const ChatBox = () => {
     };
   }, []);
 
-  if (!user) {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (!user?.roomId) {
+      router.push("/");
+    }
+  }, [user]);
 
   return (
     <div className="flex-col sm:flex-row flex h-[100dvh] gap-4 sm:gap-0 w-[100dvw] antialiased text-gray-800">
