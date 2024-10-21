@@ -14,6 +14,7 @@ const ChatInput = () => {
         roomId: user?.roomId,
         userId: user?.id,
         message,
+        name: user?.name,
       };
       const data = {
         type: SupportedOutgoingMessage.SendMessage,

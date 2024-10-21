@@ -15,6 +15,7 @@ export const LOGO_SVG = (
 );
 
 export type ChatType = {
+  id?: string;
   chatId: string;
   roomId: string;
   userId: string;
