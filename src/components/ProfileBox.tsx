@@ -8,7 +8,7 @@ const ProfileBox = () => {
     <div className="flex h-[calc(100%-26rem)] flex-col gap-4">
       <div className="flex flex-row items-center justify-between text-xs">
         <span className="font-bold">Active Rooms</span>
-        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-gray-300">
+        <span className="flex size-4 items-center justify-center rounded-full bg-gray-300">
           {rooms?.length}
         </span>
       </div>

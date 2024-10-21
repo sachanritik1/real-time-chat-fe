@@ -60,7 +60,7 @@ function SidePane({
 
   return (
     <div
-      className={`absolute left-0 top-0 z-20 flex size-full bg-gray-600 bg-opacity-50 ${justifyContent} ${alignItems}`}
+      className={`absolute left-0 top-0 z-20 flex size-full bg-gray-600/50 ${justifyContent} ${alignItems}`}
       onClick={closeSidePane}
     >
       <div
@@ -74,7 +74,7 @@ function SidePane({
         >
           {crossIcon && (
             <GiHamburgerMenu
-              className="text-textPrimary absolute left-4 top-4 size-6 cursor-pointer"
+              className="absolute left-4 top-4 size-6 cursor-pointer"
               role="button"
               onClick={(e) => {
                 e.stopPropagation();

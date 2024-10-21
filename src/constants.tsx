@@ -1,6 +1,6 @@
 export const LOGO_SVG = (
   <svg
-    className="h-6 w-6"
+    className="size-6"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"

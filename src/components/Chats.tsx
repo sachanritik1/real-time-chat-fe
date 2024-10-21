@@ -34,7 +34,7 @@ const Chats = ({ chats }: { chats: ChatType[] | null }) => {
 
   return (
     <div className="flex h-[calc(100%-5rem)] flex-auto flex-col rounded-2xl bg-gray-100 p-6 sm:h-full">
-      <div className="flex h-full flex-auto flex-shrink-0 flex-col">
+      <div className="flex h-full flex-auto shrink-0 flex-col">
         {(chats?.length ?? 0) > 0 ? (
           <div className="mb-4 flex h-full flex-col overflow-x-auto">
             <div

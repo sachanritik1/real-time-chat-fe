@@ -40,7 +40,7 @@ const ChatInput = () => {
       onSubmit={(e) => handleAddChat(e)}
       className="flex h-16 w-full flex-row items-center rounded-xl bg-white px-4"
     >
-      <div className="ml-4 flex-grow">
+      <div className="ml-4 grow">
         <div className="relative w-full">
           <input
             ref={chatRef}
@@ -52,12 +52,12 @@ const ChatInput = () => {
       <div className="ml-4">
         <button
           type="submit"
-          className="flex flex-shrink-0 items-center justify-center rounded-xl bg-indigo-500 px-4 py-1 text-white hover:bg-indigo-600"
+          className="flex shrink-0 items-center justify-center rounded-xl bg-indigo-500 px-4 py-1 text-white hover:bg-indigo-600"
         >
           <span>Send</span>
           <span className="ml-2">
             <svg
-              className="-mt-px h-4 w-4 rotate-45 transform"
+              className="-mt-px size-4 rotate-45"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

@@ -41,7 +41,7 @@ const SideBar = () => {
         position="left"
       >
         <div className="flex h-12 w-full flex-row items-center justify-center">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700">
+          <div className="flex size-10 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700">
             {LOGO_SVG}
           </div>
           <div className="ml-2 text-2xl font-bold">QuickChat</div>

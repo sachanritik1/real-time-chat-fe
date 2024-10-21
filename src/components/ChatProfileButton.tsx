@@ -33,7 +33,7 @@ const ChatProfileButton = ({ room }: { room: Room }) => {
         (user?.roomId === room?.id ? ' bg-gray-100' : '')
       }
     >
-      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-200">
+      <div className="flex size-8 items-center justify-center rounded-full bg-indigo-200">
         {room?.id?.charAt(0)?.toUpperCase()}
       </div>
       <div className="ml-2 text-sm font-semibold">{room?.name}</div>

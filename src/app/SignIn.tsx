@@ -44,11 +44,12 @@ const SignIn = () => {
       if (!ws) return;
       ws.close();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="mx-auto flex h-screen flex-col items-center justify-center">
-      <h1 className="font-bol my-4 -mt-20 text-3xl">Welcome!</h1>
+      <h1 className="my-4 -mt-20 text-3xl font-bold">Welcome!</h1>
       <div className="rounded-lg bg-slate-300 p-4">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input

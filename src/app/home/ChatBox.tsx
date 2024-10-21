@@ -49,16 +49,18 @@ const ChatBox = () => {
         console.log('Unsupported Message Types');
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (!user?.roomId) {
+    if (!user?.id) {
       router.push('/');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
-    <div className="flex h-[100dvh] w-[100dvw] flex-col gap-4 text-gray-800 antialiased sm:flex-row sm:gap-0">
+    <div className="flex h-dvh w-dvw flex-col gap-4 text-gray-800 antialiased sm:flex-row sm:gap-0">
       <SideBar />
       <Chats chats={chats} />
     </div>
