@@ -1,5 +1,5 @@
-import { Room } from "@/constants";
-import { atom } from "recoil";
+import { Room } from '@/constants';
+import { atom } from 'recoil';
 
 export type User = {
   name: string;
@@ -12,16 +12,16 @@ export type User = {
 };
 
 export const userAtom = atom({
-  key: "user",
+  key: 'user',
   default: null as User | null,
 });
 
 export const roomsAtom = atom({
-  key: "rooms",
+  key: 'rooms',
   default: [] as Room[],
 });
 
 export const wsAtom = atom({
-  key: "ws",
+  key: 'ws',
   default: null as WebSocket | null,
 });

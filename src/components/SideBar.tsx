@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { LOGO_SVG } from "../constants";
-import UserBox from "./UserBox";
-import ProfileBox from "./ProfileBox";
-import ProfileInput from "./ProfileInput";
-import { useState } from "react";
-import { useSetRecoilState } from "recoil";
-import { roomsAtom } from "../store/store";
-import SidePane from "./SidePane";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "@/apiHandlers/fetch";
+import { LOGO_SVG } from '../constants';
+import UserBox from './UserBox';
+import ProfileBox from './ProfileBox';
+import ProfileInput from './ProfileInput';
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { roomsAtom } from '../store/store';
+import SidePane from './SidePane';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { useQuery } from '@tanstack/react-query';
+import { fetchData } from '@/apiHandlers/fetch';
 
 const SideBar = () => {
   const setRooms = useSetRecoilState(roomsAtom);
@@ -18,9 +18,9 @@ const SideBar = () => {
   const [open, setOpen] = useState(true);
 
   useQuery({
-    queryKey: ["rooms"],
+    queryKey: ['rooms'],
     queryFn: async () => {
-      const data = await fetchData("/rooms");
+      const data = await fetchData('/rooms');
       return data;
     },
     onSuccess: (data) => {
@@ -29,7 +29,7 @@ const SideBar = () => {
   });
 
   return (
-    <div className="sm:w-16 w-full h-16 sm:h-full bg-blue-200 flex sm:flex-col items-center p-4">
+    <div className="flex h-16 w-full items-center bg-blue-200 p-4 sm:h-full sm:w-16 sm:flex-col">
       <GiHamburgerMenu
         className="size-6"
         role="button"
@@ -40,11 +40,11 @@ const SideBar = () => {
         closeSidePane={() => setOpen(false)}
         position="left"
       >
-        <div className="flex flex-row items-center justify-center h-12 w-full">
-          <div className="flex items-center justify-center rounded-2xl text-indigo-700 bg-indigo-100 h-10 w-10">
+        <div className="flex h-12 w-full flex-row items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700">
             {LOGO_SVG}
           </div>
-          <div className="ml-2 font-bold text-2xl">QuickChat</div>
+          <div className="ml-2 text-2xl font-bold">QuickChat</div>
         </div>
         <UserBox />
         <ProfileBox />

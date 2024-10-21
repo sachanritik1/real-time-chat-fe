@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import SideBar from "@/components/SideBar";
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userAtom, wsAtom } from "@/store/store";
-import Chats from "@/components/Chats";
-import { useRouter } from "next/navigation";
-import { ChatType, SupportedIncomingMessage } from "@/constants";
-import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "@/apiHandlers/fetch";
+import SideBar from '@/components/SideBar';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userAtom, wsAtom } from '@/store/store';
+import Chats from '@/components/Chats';
+import { useRouter } from 'next/navigation';
+import { ChatType, SupportedIncomingMessage } from '@/constants';
+import { useQuery } from '@tanstack/react-query';
+import { fetchData } from '@/apiHandlers/fetch';
 
 const ChatBox = () => {
   const [user, setUser] = useRecoilState(userAtom);
@@ -19,7 +19,7 @@ const ChatBox = () => {
   const ws = useRecoilValue(wsAtom);
 
   useQuery({
-    queryKey: ["chats", user?.roomId],
+    queryKey: ['chats', user?.roomId],
     queryFn: async () => {
       const data = await fetchData(`/chat/${user?.roomId}`);
       return data;
@@ -33,7 +33,7 @@ const ChatBox = () => {
   useEffect(() => {
     if (!ws) return;
     ws.onmessage = (message) => {
-      console.log("incoming message from chats component:", message.data);
+      console.log('incoming message from chats component:', message.data);
       const incomingMessage = JSON.parse(message.data);
       if (incomingMessage.type === SupportedIncomingMessage.JoinedRoom) {
         // @ts-expect-error: id might not exist on payload
@@ -41,24 +41,24 @@ const ChatBox = () => {
           ...prev,
           roomId: incomingMessage.payload.id,
         }));
-        console.log("joined room", incomingMessage.payload.id);
+        console.log('joined room', incomingMessage.payload.id);
       } else if (incomingMessage.type === SupportedIncomingMessage.AddChat) {
         setChats((prevChats) => [incomingMessage.payload, ...prevChats]);
-        console.log("Added Chat", incomingMessage.payload);
+        console.log('Added Chat', incomingMessage.payload);
       } else {
-        console.log("Unsupported Message Types");
+        console.log('Unsupported Message Types');
       }
     };
   }, []);
 
   useEffect(() => {
     if (!user?.roomId) {
-      router.push("/");
+      router.push('/');
     }
   }, [user]);
 
   return (
-    <div className="flex-col sm:flex-row flex h-[100dvh] gap-4 sm:gap-0 w-[100dvw] antialiased text-gray-800">
+    <div className="flex h-[100dvh] w-[100dvw] flex-col gap-4 text-gray-800 antialiased sm:flex-row sm:gap-0">
       <SideBar />
       <Chats chats={chats} />
     </div>

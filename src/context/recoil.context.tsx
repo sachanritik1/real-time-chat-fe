@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
-import { RecoilRoot } from "recoil";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 const queryClient = new QueryClient();
 

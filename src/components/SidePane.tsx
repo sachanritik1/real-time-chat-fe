@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 function SidePane({
   isOpen,
   closeSidePane,
   children,
-  position = "right",
-  padding = "p-4",
-  width = "w-[20rem]",
-  height = "h-[100dvh]",
+  position = 'right',
+  padding = 'p-4',
+  width = 'w-[20rem]',
+  height = 'h-[100dvh]',
   crossIcon = true,
-  background = "bg-secondary",
+  background = 'bg-secondary',
 }: {
   isOpen: boolean;
   closeSidePane: () => void;
   children: React.ReactNode;
-  position?: "right" | "left" | "top" | "bottom";
+  position?: 'right' | 'left' | 'top' | 'bottom';
   padding?: string;
   width?: string;
   height?: string;
@@ -24,36 +24,36 @@ function SidePane({
   background?: string;
 }) {
   // Set different flex alignment, size, and item alignment based on position
-  let justifyContent = "";
-  let sizeClasses = "";
-  let alignItems = "";
+  let justifyContent = '';
+  let sizeClasses = '';
+  let alignItems = '';
 
   switch (position) {
-    case "right":
-      justifyContent = "justify-end";
+    case 'right':
+      justifyContent = 'justify-end';
       sizeClasses = `h-full ${width} rounded-md`;
-      alignItems = "items-center";
+      alignItems = 'items-center';
       break;
-    case "left":
-      justifyContent = "justify-start";
+    case 'left':
+      justifyContent = 'justify-start';
       sizeClasses = `h-full ${width} rounded-md`;
-      alignItems = "items-center";
+      alignItems = 'items-center';
       break;
-    case "top":
-      justifyContent = "justify-center";
+    case 'top':
+      justifyContent = 'justify-center';
       sizeClasses = `${height} w-full rounded-2xl`;
-      alignItems = "items-start";
+      alignItems = 'items-start';
       break;
-    case "bottom":
-      justifyContent = "justify-center";
+    case 'bottom':
+      justifyContent = 'justify-center';
       // Add 3.5rem to height to account for footer height
       sizeClasses = `h-[calc(${height}+3.5rem)] sm:${height} w-full rounded-2xl`;
-      alignItems = "items-end";
+      alignItems = 'items-end';
       break;
     default:
-      justifyContent = "justify-end";
+      justifyContent = 'justify-end';
       sizeClasses = `h-full ${width}`;
-      alignItems = "items-center";
+      alignItems = 'items-center';
   }
 
   if (!isOpen) return null;
@@ -70,11 +70,11 @@ function SidePane({
         }}
       >
         <div
-          className={`relative flex flex-col justify-between gap-4 ${padding} h-full overflow-y-auto bg-blue-200 rounded-lg`}
+          className={`relative flex flex-col justify-between gap-4 ${padding} h-full overflow-y-auto rounded-lg bg-blue-200`}
         >
           {crossIcon && (
             <GiHamburgerMenu
-              className="absolute left-4 top-4 size-6 cursor-pointer text-textPrimary"
+              className="text-textPrimary absolute left-4 top-4 size-6 cursor-pointer"
               role="button"
               onClick={(e) => {
                 e.stopPropagation();

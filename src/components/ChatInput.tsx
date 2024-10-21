@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { useRecoilValue } from "recoil";
-import { userAtom } from "../store/store";
-import { SupportedOutgoingMessage } from "../constants";
-import { wsAtom } from "../store/store";
+import { useRef } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../store/store';
+import { SupportedOutgoingMessage } from '../constants';
+import { wsAtom } from '../store/store';
 
 const ChatInput = () => {
   const user = useRecoilValue(userAtom);
@@ -31,33 +31,33 @@ const ChatInput = () => {
     const chat = chatRef.current?.value;
     if (!chat) return;
     addChat(chat);
-    chatRef.current.value = "";
+    chatRef.current.value = '';
     console.log(`Chat added: ${chat} at ${new Date().toLocaleTimeString()}`);
   };
 
   return (
     <form
       onSubmit={(e) => handleAddChat(e)}
-      className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
+      className="flex h-16 w-full flex-row items-center rounded-xl bg-white px-4"
     >
-      <div className="flex-grow ml-4">
+      <div className="ml-4 flex-grow">
         <div className="relative w-full">
           <input
             ref={chatRef}
             type="text"
-            className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+            className="flex h-10 w-full rounded-xl border pl-4 focus:border-indigo-300 focus:outline-none"
           />
         </div>
       </div>
       <div className="ml-4">
         <button
           type="submit"
-          className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
+          className="flex flex-shrink-0 items-center justify-center rounded-xl bg-indigo-500 px-4 py-1 text-white hover:bg-indigo-600"
         >
           <span>Send</span>
           <span className="ml-2">
             <svg
-              className="w-4 h-4 transform rotate-45 -mt-px"
+              className="-mt-px h-4 w-4 rotate-45 transform"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

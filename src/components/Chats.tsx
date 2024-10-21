@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import ChatInput from "./ChatInput";
-import Chat from "./Chat";
-import { useEffect, useRef } from "react";
-import { useRecoilValue } from "recoil";
-import { userAtom } from "../store/store";
-import DefaultChatPage from "./DefaultChatPage";
-import { ChatType } from "@/constants";
+import ChatInput from './ChatInput';
+import Chat from './Chat';
+import { useEffect, useRef } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../store/store';
+import DefaultChatPage from './DefaultChatPage';
+import { ChatType } from '@/constants';
 
 const Chats = ({ chats }: { chats: ChatType[] | null }) => {
   const user = useRecoilValue(userAtom);
@@ -33,10 +33,10 @@ const Chats = ({ chats }: { chats: ChatType[] | null }) => {
   }
 
   return (
-    <div className="flex flex-col flex-auto h-[calc(100%-5rem)] sm:h-full bg-gray-100 p-6 rounded-2xl">
-      <div className="flex flex-col flex-auto flex-shrink-0 h-full">
+    <div className="flex h-[calc(100%-5rem)] flex-auto flex-col rounded-2xl bg-gray-100 p-6 sm:h-full">
+      <div className="flex h-full flex-auto flex-shrink-0 flex-col">
         {(chats?.length ?? 0) > 0 ? (
-          <div className="flex flex-col h-full overflow-x-auto mb-4">
+          <div className="mb-4 flex h-full flex-col overflow-x-auto">
             <div
               ref={scrollContainerRef}
               className="flex flex-col-reverse overflow-y-auto p-4"
@@ -51,7 +51,7 @@ const Chats = ({ chats }: { chats: ChatType[] | null }) => {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-center my-auto italic font-semibold">
+          <div className="my-auto flex items-center justify-center font-semibold italic">
             No Chats Yet
           </div>
         )}

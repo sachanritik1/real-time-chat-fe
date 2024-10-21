@@ -1,6 +1,6 @@
 export const LOGO_SVG = (
   <svg
-    className="w-6 h-6"
+    className="h-6 w-6"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -25,15 +25,15 @@ export type ChatType = {
 };
 
 export enum SupportedOutgoingMessage {
-  JoinRoom = "JOIN_ROOM",
-  SendMessage = "SEND_MESSAGE",
-  UpvoteMessage = "UPVOTE_MESSAGE",
+  JoinRoom = 'JOIN_ROOM',
+  SendMessage = 'SEND_MESSAGE',
+  UpvoteMessage = 'UPVOTE_MESSAGE',
 }
 
 export enum SupportedIncomingMessage {
-  AddChat = "ADD_CHAT",
-  UpdateChat = "UPDATE_CHAT",
-  JoinedRoom = "JOINED_ROOM",
+  AddChat = 'ADD_CHAT',
+  UpdateChat = 'UPDATE_CHAT',
+  JoinedRoom = 'JOINED_ROOM',
 }
 
 export type Room = {

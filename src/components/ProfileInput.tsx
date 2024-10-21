@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { useSetRecoilState } from "recoil";
-import { roomsAtom } from "../store/store";
-import { Room } from "@/constants";
-import { useMutation } from "@tanstack/react-query";
-import { fetchData } from "@/apiHandlers/fetch";
+import { useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { roomsAtom } from '../store/store';
+import { Room } from '@/constants';
+import { useMutation } from '@tanstack/react-query';
+import { fetchData } from '@/apiHandlers/fetch';
 
 const ProfileInput = () => {
   const roomIdRef = useRef<HTMLInputElement>(null);
@@ -13,12 +13,12 @@ const ProfileInput = () => {
 
   const { mutate: createRoom, isLoading } = useMutation({
     mutationFn: async (room: { name: string }) => {
-      const data = await fetchData("/create/room", "POST", room);
+      const data = await fetchData('/create/room', 'POST', room);
       return data;
     },
     onSuccess: (data) => {
       setRooms((prev: Room[]) => [...prev, data.room]);
-      roomIdRef.current!.value = "";
+      roomIdRef.current!.value = '';
     },
   });
 
@@ -34,13 +34,13 @@ const ProfileInput = () => {
       <input
         ref={roomIdRef}
         type="text"
-        className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+        className="flex h-10 w-full rounded-xl border pl-4 focus:border-indigo-300 focus:outline-none"
         placeholder="Type room id here..."
       />
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full h-10 mt-2 bg-indigo-500 hover:bg-indigo-800 text-white rounded-lg"
+        className="mt-2 h-10 w-full rounded-lg bg-indigo-500 text-white hover:bg-indigo-800"
       >
         Create Room
       </button>
