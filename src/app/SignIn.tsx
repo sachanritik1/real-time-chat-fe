@@ -22,7 +22,7 @@ const SignIn = () => {
     },
     onSuccess: (data) => {
       setUser({ ...data?.user, roomId: null });
-      if (data?.user) router.push("/home");
+      if (data?.user?.id) router.push("/home");
     },
   });
 
