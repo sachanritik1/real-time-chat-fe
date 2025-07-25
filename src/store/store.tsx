@@ -20,8 +20,3 @@ export const roomsAtom = atom({
   key: 'rooms',
   default: [] as Room[],
 });
-
-export const wsAtom = atom({
-  key: 'ws',
-  default: null as WebSocket | null,
-});

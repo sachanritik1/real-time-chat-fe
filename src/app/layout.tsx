@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import RecoilRootWrapper from '@/context/recoil.context';
+import { AuthProvider } from '@/context/AuthContext';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,11 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <RecoilRootWrapper>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
+        <AuthProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+          </body>
+        </AuthProvider>
       </RecoilRootWrapper>
     </html>
   );

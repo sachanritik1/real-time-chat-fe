@@ -2,25 +2,25 @@
 
 import { useRecoilValue } from 'recoil';
 import { Room, SupportedOutgoingMessage } from '../constants';
-import { userAtom, wsAtom } from '../store/store';
+import { userAtom } from '../store/store';
+import { useAuth } from '@/context/AuthContext';
 
 const ChatProfileButton = ({ room }: { room: Room }) => {
   const user = useRecoilValue(userAtom);
-
-  const ws = useRecoilValue(wsAtom);
+  const { ws, connectionStatus } = useAuth();
 
   const handleJoinRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ws || connectionStatus !== 'connected') return;
+
     e.currentTarget.disabled = true;
     console.log(`Joining room ${room?.id}`);
     const data = {
       type: SupportedOutgoingMessage.JoinRoom,
       payload: {
         roomId: room?.id,
-        name: user?.name,
-        userId: user?.id,
+        // Server now uses authenticated user data, so we don't need to send user info
       },
     };
-    if (!ws) return;
     ws.send(JSON.stringify(data));
     e.currentTarget.disabled = false;
   };

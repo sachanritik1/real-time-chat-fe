@@ -14,7 +14,7 @@ const UserBox = () => {
         className="size-12 rounded-full sm:size-24"
       />
       <div className="mt-2 text-sm font-semibold">{user?.name}</div>
-      <div className="text-xs text-gray-500">@{user?.id}</div>
+      <div className="text-xs text-gray-500">{user?.email}</div>
     </div>
   );
 };

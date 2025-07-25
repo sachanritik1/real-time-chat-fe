@@ -1,7 +1,12 @@
 import ChatBox from './ChatBox';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const Home = () => {
-  return <ChatBox />;
+  return (
+    <ProtectedRoute>
+      <ChatBox />
+    </ProtectedRoute>
+  );
 };
 
 export default Home;

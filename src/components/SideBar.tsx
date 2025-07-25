@@ -11,10 +11,13 @@ import SidePane from './SidePane';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '@/apiHandlers/fetch';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const SideBar = () => {
   const setRooms = useSetRecoilState(roomsAtom);
-
+  const { logout, user } = useAuth();
+  const router = useRouter();
   const [open, setOpen] = useState(true);
 
   useQuery({
@@ -49,6 +52,20 @@ const SideBar = () => {
         <UserBox />
         <ProfileBox />
         <ProfileInput />
+        <div className="mt-auto p-4">
+          <div className="mb-2 text-sm text-gray-600">
+            Welcome, {user?.name}
+          </div>
+          <button
+            onClick={async () => {
+              await logout();
+              router.push('/');
+            }}
+            className="w-full rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </div>
       </SidePane>
     </div>
   );

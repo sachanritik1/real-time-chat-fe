@@ -2,25 +2,22 @@ import { useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../store/store';
 import { SupportedOutgoingMessage } from '../constants';
-import { wsAtom } from '../store/store';
+import { useAuth } from '@/context/AuthContext';
 
 const ChatInput = () => {
   const user = useRecoilValue(userAtom);
-  const ws = useRecoilValue(wsAtom);
+  const { ws, connectionStatus } = useAuth();
 
   const addChat = (message: string) => {
-    if (message) {
-      const newChat = {
-        roomId: user?.roomId,
-        userId: user?.id,
-        message,
-        name: user?.name,
-      };
+    if (message && ws && connectionStatus === 'connected' && user?.roomId) {
+      // Server now uses authenticated user data, so we only need to send the message and roomId
       const data = {
         type: SupportedOutgoingMessage.SendMessage,
-        payload: newChat,
+        payload: {
+          roomId: user.roomId,
+          message,
+        },
       };
-      if (!ws) return;
       ws.send(JSON.stringify(data));
     }
   };
